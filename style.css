@@ -1,0 +1,112 @@
+html,
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: "Ubuntu", sans-serif;
+}
+
+main {
+  position: relative;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+canvas {
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  color: #747474;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.squares_div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 10px;
+  padding: 5px 10px;
+  position: fixed;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.color_square {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+
+  &[data-color="red"] {
+    background-color: red;
+  }
+  &[data-color="green"] {
+    background-color: green;
+  }
+  &[data-color="blue"] {
+    background-color: blue;
+  }
+  &[data-color="yellow"] {
+    background-color: yellow;
+  }
+}
+
+.eraser {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-image: url("/images/eraser-fill.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: white;
+}
+
+.results {
+    display: none;
+    position: fixed;
+    inset: 0; /* shorthand for top, right, bottom, left */
+    z-index: 100;
+}
+
+.results .content {
+    margin: 0 auto;
+    width: clamp(300px, 50vw, 600px); /* Ensures responsive width */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+    z-index: 10;
+}
+
+.results .overlay {
+    position: absolute; /* Ensures proper stacking */
+    inset: 0; /* Covers the entire viewport */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
