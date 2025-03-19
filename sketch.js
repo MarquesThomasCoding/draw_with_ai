@@ -7,7 +7,20 @@ let drawingColor = "red"; // Default color for drawing
 let isTouching = false; // Track whether fingers were touching previously
 let overlayImage;
 let isDetecting = false;
+
 const detectionParagraph = document.getElementById("detection");
+const drawingCategoryParagraph = document.getElementById("drawing-category");
+
+const randomDrawingCategories = [
+  "apple",
+  "banana",
+  "bicycle",
+  "car",
+  "tree",
+];
+
+const randomDrawingCategory = randomDrawingCategories[Math.floor(Math.random() * randomDrawingCategories.length)];
+drawingCategoryParagraph.innerHTML = "Draw a: <b>" + randomDrawingCategory + "</b>";
 
 const squares = [
   { x: 10, y: 10, size: 30, color: "red" },
@@ -134,8 +147,10 @@ function draw() {
 
   if (isDetecting) {
     detectionParagraph.innerText = "Detecting";
+	detectionParagraph.style.color = "green";
   } else {
     detectionParagraph.innerText = "Not detecting";
+	detectionParagraph.style.color = "red";
   }
 }
 
@@ -144,9 +159,13 @@ function toggleDetection() {
   if (isDetecting) {
     handPose.detectStop();
     isDetecting = false;
+	detectionParagraph.innerText = "Not detecting";
+	detectionParagraph.style.color = "red";
   } else {
     handPose.detectStart(video, gotHands);
     isDetecting = true;
+	detectionParagraph.innerText = "Detecting";
+	detectionParagraph.style.color = "green";
   }
 }
 
@@ -196,13 +215,13 @@ function submitImage() {
     }
     console.log(results); // Affiche les résultats de classification
     // Traite les résultats ici
-	let label = results[0].label;
-	let confidence = results[0].confidence;
+	let label = results.find((result) => result.label === randomDrawingCategory);
+	let confidence = label ? (label.confidence * 100).toFixed(2) + "%" : "0%";
 	let resultsDiv = document.querySelector(".results");
 	let resultsContent = resultsDiv.querySelector(".inner-results");
 	resultsContent.innerHTML = `
 		<h2>Classification Results</h2>
-		<p>Label: ${label}</p>
+		<p>Label: ${label ? label.label : "None"}</p>
 		<p>Confidence: ${confidence}</p>
 	`;
 	resultsDiv.style.display = "block";

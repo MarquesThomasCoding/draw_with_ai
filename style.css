@@ -33,6 +33,15 @@ button {
   }
 }
 
+#drawing-category {
+    margin: 20px auto;
+    padding: 10px 20px;
+    width: fit-content;
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
 .squares_div {
   display: flex;
   align-items: center;
@@ -109,4 +118,10 @@ button {
     inset: 0; /* Covers the entire viewport */
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 5;
+}
+
+#detection {
+    margin-inline: auto;
+    text-align: center;
+    border-radius: 10px;
 }
