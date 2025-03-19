@@ -12,11 +12,20 @@ const detectionParagraph = document.getElementById("detection");
 const drawingCategoryParagraph = document.getElementById("drawing-category");
 
 const randomDrawingCategories = [
-  "apple",
-  "banana",
-  "bicycle",
-  "car",
-  "tree",
+	"car",
+	"tree",
+	"banana",
+	"bicycle",
+	"sheep",
+	"airplane",
+	"barn",
+	"bell",
+	"binoculars",
+	"camera",
+	"diamond",
+	"donut",
+	"ship",
+	"skull",
 ];
 
 const randomDrawingCategory = randomDrawingCategories[Math.floor(Math.random() * randomDrawingCategories.length)];
@@ -44,6 +53,7 @@ function preload() {
   // Load the handPose model
   handPose = ml5.handPose({
     flipped: true,
+	maxHands: 1,
   });
   // Load the overlay image
   overlayImage = loadImage("images/whiteboard.jpg");
@@ -193,13 +203,14 @@ function submitImage() {
   let canvas = document.querySelector("canvas");
   let imageBase64 = canvas.toDataURL("image/png"); // Convert into base64 image
   let img; // Declare img in the outer scope
-  let model = "https://teachablemachine.withgoogle.com/models/vh7K_WR8m/";
+  let imageModelURL = "https://teachablemachine.withgoogle.com/models/XyFk6qtMF/";
+  let classifier;
 
-  const classifier = ml5.imageClassifier(model, modelLoaded);
+  classifier = ml5.imageClassifier(imageModelURL, modelLoaded);
 
   function modelLoaded() {
     console.log("Model Loaded!");
-    img = createImg(imageBase64);
+    img = createImg(imageBase64, "Generated drawing");
     img.hide();
     imageReady();
   }
@@ -213,16 +224,20 @@ function submitImage() {
       console.error(error);
       return;
     }
-	
-	let label = results.find((result) => result.label === randomDrawingCategory);
-	let confidence = label ? (label.confidence * 100).toFixed(2) + "%" : "0%";
-	let resultsDiv = document.querySelector(".results");
-	let resultsContent = resultsDiv.querySelector(".inner-results");
-	resultsContent.innerHTML = `
-		<h2>Classification Results</h2>
-		<p>Label: ${label ? label.label : "None"}</p>
-		<p>Confidence: ${confidence}</p>
-	`;
-	resultsDiv.style.display = "block";
+
+    console.log(results);
+
+    // Find the label and handle cases where it is not found
+    let label = results.find((result) => result.label === randomDrawingCategory);
+    let confidence = label ? (label.confidence * 100).toFixed(2) + "%" : "0%";
+
+    let resultsDiv = document.querySelector(".results");
+    let resultsContent = resultsDiv.querySelector(".inner-results");
+    resultsContent.innerHTML = `
+      <h2>Classification Results</h2>
+      <p>Label: ${randomDrawingCategory}</p>
+      <p>Confidence: ${confidence}</p>
+    `;
+    resultsDiv.style.display = "block";
   }
 }
