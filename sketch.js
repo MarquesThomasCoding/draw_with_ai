@@ -191,7 +191,7 @@ function clearBoard() {
 
 function submitImage() {
   let canvas = document.querySelector("canvas");
-  let imageBase64 = canvas.toDataURL("image/png"); // Convertir en base64
+  let imageBase64 = canvas.toDataURL("image/png"); // Convert into base64 image
   let img; // Declare img in the outer scope
   let model = "https://teachablemachine.withgoogle.com/models/vh7K_WR8m/";
 
@@ -213,8 +213,7 @@ function submitImage() {
       console.error(error);
       return;
     }
-    console.log(results); // Affiche les résultats de classification
-    // Traite les résultats ici
+	
 	let label = results.find((result) => result.label === randomDrawingCategory);
 	let confidence = label ? (label.confidence * 100).toFixed(2) + "%" : "0%";
 	let resultsDiv = document.querySelector(".results");
