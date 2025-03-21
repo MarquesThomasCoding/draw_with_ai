@@ -23,6 +23,6 @@ La reconnaissance de la main est réalisé avec le handPose de ml5.js.
 
 ## Live demo
 
-Vous pouvez essayer la demo [ici](https://MarquesThomasCoding.github.io/draw-with-ai/)
+Vous pouvez essayer la demo [ici](https://MarquesThomasCoding.github.io/draw_with_ai/)
 
 ```
