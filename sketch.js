@@ -34,7 +34,7 @@ const squares = [
   { x: 60, y: 10, size: 30, color: "green" },
   { x: 110, y: 10, size: 30, color: "blue" },
   { x: 160, y: 10, size: 30, color: "yellow" },
-  { x: 210, y: 10, size: 30, color: "purple", label: "eraser" }, // Add eraser square
+  { x: 210, y: 10, size: 30, color: "white", label: "eraser" }, // Add eraser square
 ];
 
 // Function to check if a point is inside a rectangle
@@ -69,17 +69,13 @@ function setup() {
 }
 
 function draw() {
-  background(0); // Clear the canvas to avoid ghosting effects
+  background(0); // Clear the background
 
   // Reset all square borders
   for (let square of squares) {
-    document.querySelector(
-      `.color_square[data-color='${square.color}']`
-    ).style.border = "none";
+    document.querySelector(`.color_square[data-color='${square.color}']`).style.border = "none";
     if (drawingColor == square.color) {
-      document.querySelector(
-        `.color_square[data-color='${square.color}']`
-      ).style.border = "2px inset black";
+      document.querySelector(`.color_square[data-color='${square.color}']`).style.border = "2px inset black";
     }
   }
 
@@ -111,13 +107,12 @@ function draw() {
       fill("red");
       noStroke();
       circle(midX, midY, 12);
-      if (drawingColor === "purple") {
+      if (drawingColor === "white") {
         // Erase lines under the eraser
         drawing = drawing.filter(
           (point) =>
-            dist(point.x, point.y, midX, midY) > TOUCH_THRESHOLD ||
-            point.newStroke
-        );
+            dist(point.x, point.y, midX, midY) > TOUCH_THRESHOLD || point.newStroke
+          );
       } else {
         if (!isTouching) {
           drawing.push({ newStroke: true }); // Mark the start of a new stroke
@@ -140,14 +135,9 @@ function draw() {
 
     // Check if the index finger is on any square
     for (let square of squares) {
-      if (
-        !isTouching &&
-        isPointInRect(indexKeypoint.x, indexKeypoint.y, square)
-      ) {
+      if (!isTouching && isPointInRect(indexKeypoint.x, indexKeypoint.y, square)) {
         drawingColor = square.color;
-        document.querySelector(
-          `.color_square[data-color='${square.color}']`
-        ).style.border = "2px inset black";
+        document.querySelector(`.color_square[data-color='${square.color}']`).style.border = "2px inset black";
         break;
       }
     }
@@ -155,10 +145,10 @@ function draw() {
 
   if (isDetecting) {
     detectionParagraph.innerText = "Detecting";
-	detectionParagraph.style.color = "green";
+	  detectionParagraph.style.color = "green";
   } else {
     detectionParagraph.innerText = "Not detecting";
-	detectionParagraph.style.color = "red";
+	  detectionParagraph.style.color = "red";
   }
 }
 
@@ -167,19 +157,14 @@ function toggleDetection() {
   if (isDetecting) {
     handPose.detectStop();
     isDetecting = false;
-	detectionParagraph.innerText = "Not detecting";
-	detectionParagraph.style.color = "red";
   } else {
     handPose.detectStart(video, gotHands);
     isDetecting = true;
-	detectionParagraph.innerText = "Detecting";
-	detectionParagraph.style.color = "green";
   }
 }
 
 // Callback function for when handPose outputs data
 function gotHands(results) {
-  // Save the output to the hands variable
   hands = results;
 }
 
@@ -200,7 +185,7 @@ function clearBoard() {
 function submitImage() {
   let canvas = document.querySelector("canvas");
   let imageBase64 = canvas.toDataURL("image/png"); // Convert into base64 image
-  let img; // Declare img in the outer scope
+  let img;
   let imageModelURL = "https://teachablemachine.withgoogle.com/models/XyFk6qtMF/";
   let classifier;
 
