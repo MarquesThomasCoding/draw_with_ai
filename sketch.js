@@ -3,7 +3,7 @@ let video;
 let hands = [];
 const TOUCH_THRESHOLD = 30; // Pixel threshold to consider the fingers touching
 let drawing = []; // Store drawn lines
-let drawingColor = "red"; // Default color for drawing
+let drawingColor = "black"; // Default color for drawing
 let isTouching = false; // Track whether fingers were touching previously
 let overlayImage;
 let isDetecting = false;
@@ -30,11 +30,12 @@ const randomDrawingCategory = randomDrawingCategories[Math.floor(Math.random() *
 drawingCategoryParagraph.innerHTML = "Draw a: <b>" + randomDrawingCategory + "</b>";
 
 const squares = [
-  { x: 10, y: 10, size: 30, color: "red" },
-  { x: 60, y: 10, size: 30, color: "green" },
-  { x: 110, y: 10, size: 30, color: "blue" },
-  { x: 160, y: 10, size: 30, color: "yellow" },
-  { x: 210, y: 10, size: 30, color: "white", label: "eraser" }, // Add eraser square
+  { x: 10, y: 10, size: 30, color: "black" },
+  { x: 60, y: 10, size: 30, color: "red" },
+  { x: 110, y: 10, size: 30, color: "green" },
+  { x: 160, y: 10, size: 30, color: "blue" },
+  { x: 210, y: 10, size: 30, color: "yellow" },
+  { x: 260, y: 10, size: 30, color: "white", label: "eraser" }, // Add eraser square
 ];
 
 // Function to check if a point is inside a rectangle

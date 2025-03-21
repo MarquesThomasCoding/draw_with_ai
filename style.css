@@ -61,6 +61,9 @@ button {
   height: 30px;
   border-radius: 5px;
 
+  &[data-color="black"] {
+    background-color: black;
+  }
   &[data-color="red"] {
     background-color: red;
   }
