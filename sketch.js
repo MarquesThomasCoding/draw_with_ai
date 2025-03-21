@@ -61,10 +61,10 @@ function preload() {
 function setup() {
   createCanvas(min(windowWidth, 640), min(windowHeight, 480));
   // Create the webcam video (without displaying it)
-  video = createCapture(VIDEO);
+  video = createCapture(VIDEO, {
+    flipped: true,
+  });
   video.size(min(windowWidth, 640), min(windowHeight, 480));
-  //   invert camera
-  video.style("transform", "scaleX(-1)");
   video.position(0, 0);
   video.hide();
 }
