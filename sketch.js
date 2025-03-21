@@ -20,8 +20,6 @@ const randomDrawingCategories = [
 	"airplane",
 	"barn",
 	"bell",
-	"binoculars",
-	"camera",
 	"diamond",
 	"donut",
 	"ship",
@@ -65,7 +63,7 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(min(windowWidth, 640), min(windowHeight, 480));
   //   invert camera
-  video.style("transform", "scale(-.25, .25)");
+  video.style("transform", "scaleX(-1)");
   video.position(0, 0);
   video.hide();
 }
