@@ -81,7 +81,7 @@ button {
   height: 30px;
   border-radius: 5px;
   border: 1px solid black;
-  background-image: url("/images/eraser-fill.svg");
+  background-image: url("images/eraser-fill.svg");
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
